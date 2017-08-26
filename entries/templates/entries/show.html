@@ -2,15 +2,17 @@
 
 {% block content %}
   <p>
-    <a href="/entries/">戻る</a>
+    <a href="/entries/">一覧へ</a>
   </p>
   <h2>
     {{ entry.title }}
   </h2>
-  <h4>
-    {{ entry.created_at }}
-  </h4>
+  <h5>
+    作成日時: {{ entry.created_at }} / 最終更新: {{ entry.updated_at }}
+  </hr>
   <p>
-    {{ entry.body }}
+    <pre>
+{{ entry.body }}
+    </pre>
   </p>
 {% endblock %}

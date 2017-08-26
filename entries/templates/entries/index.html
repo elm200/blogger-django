@@ -14,14 +14,14 @@
         {% for entry in entries %}
           <tr>
               <td><a href="/entries/{{ entry.id }}">{{ entry.title }}</a></td>
-              <td>{{ entry.body }}</td>
+              <td>{{ entry.body | truncatechars:30 }}</td>
               <td>{{ entry.created_at }}</td>
               <td>{{ entry.updated_at }}</td>
               <td>
                 <a href="/entries/{{ entry.id }}/edit">編集</a>
               </td>
               <td>
-                <a href="/entries/{{ entry.id }}/edit">削除</a>
+                <a href="/entries/{{ entry.id }}/destroy">削除</a>
               </td>
           </tr>
         {% endfor %}
