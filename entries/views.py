@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 
 from .models import Entry
 
@@ -27,3 +27,8 @@ def update(request, entry_id):
     entry.save()
 
     return HttpResponseRedirect(reverse("show", args=(entry.id,)))
+
+def destroy(request, entry_id):
+    entry = get_object_or_404(Entry, pk=entry_id)
+    entry.delete()
+    return HttpResponse(status=204)

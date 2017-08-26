@@ -2,6 +2,7 @@
 
 {% block content %}
   {% if entries %}
+    <input type="hidden" id="csrf_token" value="{{ csrf_token }}" />
     <table class="table table-striped table-hover">
       <tbody>
         <tr>
@@ -21,7 +22,7 @@
                 <a href="/entries/{{ entry.id }}/edit">編集</a>
               </td>
               <td>
-                <a href="/entries/{{ entry.id }}/destroy">削除</a>
+                <a href="/entries/{{ entry.id }}/destroy" class="destroy" data-url="/entries/{{ entry.id }}/destroy">削除</a>
               </td>
           </tr>
         {% endfor %}
