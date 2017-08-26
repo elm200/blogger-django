@@ -1,0 +1,16 @@
+{% extends 'entries/base.html' %}
+
+{% block content %}
+  <p>
+    <a href="/entries/">戻る</a>
+  </p>
+  <h2>
+    {{ entry.title }}
+  </h2>
+  <h4>
+    {{ entry.created_at }}
+  </h4>
+  <p>
+    {{ entry.body }}
+  </p>
+{% endblock %}
