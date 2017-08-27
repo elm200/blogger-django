@@ -1,11 +1,14 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.paginator import Paginator
 
 from .models import Entry
 
 def index(request):
     entries = Entry.objects.order_by('-created_at')
+    paginator = Paginator(entries, 10)
+    entries= paginator.page(request.GET.get('page', 1))
     context = { 'entries': entries, 'title': 'エントリー一覧' }
     return render(request, 'entries/index.html', context)
 
