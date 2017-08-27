@@ -4,9 +4,9 @@
   <p>
     <a href="/entries/">一覧へ</a>
   </p>
-  <form action="/entries/{{ entry.id }}/update" method="post">
+  <form action="/entries/create" method="post">
     {% csrf_token %}
     {% include 'entries/_fields.html' %}
-    <button type="submit" class="btn btn-primary">更新</button>
+    <button type="submit" class="btn btn-primary">作成</button>
   </form>
 {% endblock %}

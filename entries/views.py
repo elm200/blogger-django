@@ -14,6 +14,17 @@ def show(request, entry_id):
     context = { 'entry': entry, 'title': 'エントリー詳細' }
     return render(request, 'entries/show.html', context)
 
+def new(request):
+    entry = Entry()
+    context = { 'entry': entry, 'title': 'エントリー新規作成' }
+    return render(request, 'entries/new.html', context)
+
+def create(request):
+    entry = Entry(title=request.POST['title'], body=request.POST['body'])
+    entry.save()
+
+    return HttpResponseRedirect(reverse("show", args=(entry.id,)))
+
 def edit(request, entry_id):
     entry = get_object_or_404(Entry, pk=entry_id)
     context = { 'entry': entry, 'title': 'エントリー編集' }

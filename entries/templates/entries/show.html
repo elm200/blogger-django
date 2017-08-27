@@ -2,15 +2,16 @@
 
 {% block content %}
   <p>
-    <a href="/entries/">一覧へ</a>
+    <a href="/entries/">一覧へ</a> |
+    <a href="/entries/{{ entry.id }}/edit">編集</a>
   </p>
   <h2>
     {{ entry.title }}
   </h2>
   <h5>
     作成日時: {{ entry.created_at }} / 最終更新: {{ entry.updated_at }}
-  </hr>
-  <p>
-    <pre>{{ entry.body }}</pre>
-  </p>
+  </h5>
+  <div class="entry-body">
+    {{ entry.body | linebreaks }}
+  </div>
 {% endblock %}
