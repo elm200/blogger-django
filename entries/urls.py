@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^(?P<entry_id>[0-9]+)/edit$', entry.edit, name='edit'),
     url(r'^(?P<entry_id>[0-9]+)/update$', entry.update, name='update'),
     url(r'^(?P<entry_id>[0-9]+)/destroy$', entry.destroy, name='destroy'),
+    url(r'^(?P<entry_id>[0-9]+)/create_comment$', entry.create_comment, name='create_comment'),
 ]

@@ -1,17 +1,43 @@
 {% extends 'entries/base.html' %}
 
 {% block content %}
-  <p>
-    <a href="/entries/">一覧へ</a> |
-    <a href="/entries/{{ entry.id }}/edit">編集</a>
-  </p>
-  <h2>
-    {{ entry.title }}
-  </h2>
-  <h5>
-    作成日時: {{ entry.created_at }} / 最終更新: {{ entry.updated_at }}
-  </h5>
-  <div class="entry-body">
-    {{ entry.body | linebreaks }}
+  <div class="row">
+    <p>
+      <a href="/entries/">一覧へ</a> |
+      <a href="/entries/{{ entry.id }}/edit">編集</a>
+    </p>
+    <h2>
+      {{ entry.title }}
+    </h2>
+    <h5>
+      作成日時: {{ entry.created_at }} / 最終更新: {{ entry.updated_at }}
+    </h5>
+    <div class="entry-body">
+      {{ entry.body | linebreaks }}
+    </div>
+  </div>
+  <div class="row">
+    <h3>
+      コメント
+    </h3>
+    <form action="/entries/{{ entry.id }}/create_comment" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label>お名前</label>
+        <input type="text" name="user_name" class="form-control" value="{{ new_comment.user_name | default:"anonymous" }}">
+      </div>
+      <div class="form-group">
+        <label>本文</label>
+        <textarea rows="5" name="comment_body" class="form-control">{{ comment.body }}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">コメント投稿</button>
+    </form>
+    <br>
+    {% for comment in entry.comment_set.all %}
+      <p class="comment-user-name">{{ comment.user_name }}: {{ comment.created_at }}</p>
+      <div class="comment-body">
+        {{ comment.body | linebreaks }}
+      </div>
+    {% endfor %}
   </div>
 {% endblock %}

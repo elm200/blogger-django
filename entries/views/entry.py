@@ -5,9 +5,11 @@ from django.core.paginator import Paginator
 
 from entries.models import Entry
 
+entries_per_page = 10
+
 def index(request):
     entries = Entry.objects.order_by('-created_at')
-    paginator = Paginator(entries, 10)
+    paginator = Paginator(entries, entries_per_page)
     entries= paginator.page(request.GET.get('page', 1))
     context = { 'entries': entries, 'title': 'エントリー一覧' }
     return render(request, 'entries/index.html', context)
@@ -46,3 +48,8 @@ def destroy(request, entry_id):
     entry = get_object_or_404(Entry, pk=entry_id)
     entry.delete()
     return HttpResponse(status=204)
+
+def create_comment(request, entry_id):
+    entry = get_object_or_404(Entry, pk=entry_id)
+    entry.comment_set.create(user_name=request.POST['user_name'], body=request.POST['comment_body'])
+    return HttpResponseRedirect(reverse("show", args=(entry.id,)))
