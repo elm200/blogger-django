@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator
 
-from .models import Entry
+from entries.models import Entry
 
 def index(request):
     entries = Entry.objects.order_by('-created_at')

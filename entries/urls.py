@@ -1,13 +1,13 @@
 from django.conf.urls import url
 
-from . import views
+from entries.views import entry
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^(?P<entry_id>[0-9]+)$', views.show, name='show'),
-    url(r'^new$', views.new, name='new'),
-    url(r'^create$', views.create, name='create'),
-    url(r'^(?P<entry_id>[0-9]+)/edit$', views.edit, name='edit'),
-    url(r'^(?P<entry_id>[0-9]+)/update$', views.update, name='update'),
-    url(r'^(?P<entry_id>[0-9]+)/destroy$', views.destroy, name='destroy'),
+    url(r'^$', entry.index, name='index'),
+    url(r'^(?P<entry_id>[0-9]+)$', entry.show, name='show'),
+    url(r'^new$', entry.new, name='new'),
+    url(r'^create$', entry.create, name='create'),
+    url(r'^(?P<entry_id>[0-9]+)/edit$', entry.edit, name='edit'),
+    url(r'^(?P<entry_id>[0-9]+)/update$', entry.update, name='update'),
+    url(r'^(?P<entry_id>[0-9]+)/destroy$', entry.destroy, name='destroy'),
 ]
