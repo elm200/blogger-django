@@ -4,8 +4,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.paginator import Paginator
 
 from entries.models import Entry
+from entries.forms import EntryForm
 
-entries_per_page = 10
+entries_per_page = 3
 
 def index(request):
     entries = Entry.objects.order_by('-created_at')
@@ -21,7 +22,8 @@ def show(request, entry_id):
 
 def new(request):
     entry = Entry()
-    context = { 'entry': entry, 'title': 'エントリー新規作成' }
+    form = EntryForm()
+    context = { 'entry': entry, 'title': 'エントリー新規作成', 'form': form }
     return render(request, 'entries/new.html', context)
 
 def create(request):
@@ -32,7 +34,8 @@ def create(request):
 
 def edit(request, entry_id):
     entry = get_object_or_404(Entry, pk=entry_id)
-    context = { 'entry': entry, 'title': 'エントリー編集' }
+    form = EntryForm()
+    context = { 'entry': entry, 'title': 'エントリー編集', 'form': form }
     return render(request, 'entries/edit.html', context)
 
 def update(request, entry_id):

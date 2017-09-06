@@ -6,7 +6,7 @@
   </p>
   <form action="/entries/create" method="post">
     {% csrf_token %}
-    {% include 'entries/_fields.html' %}
+    {{ form.as_p }}
     <button type="submit" class="btn btn-primary">作成</button>
   </form>
 {% endblock %}

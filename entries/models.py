@@ -1,8 +1,16 @@
 from django.db import models
 
 class Entry(models.Model):
-    title = models.CharField(max_length=100)
-    body = models.CharField(max_length=10000)
+    title = models.CharField(
+        max_length=100,
+        verbose_name='タイトル',
+        help_text='タイトルを入力してください',
+    )
+    body = models.CharField(
+        max_length=10000,
+        verbose_name='本文',
+        help_text='本文を入力してください',
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
